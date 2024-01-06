@@ -3,14 +3,19 @@ import AudioClips from "./Clip";
 
 const Drum = () => {
     const [activekey, setActiveKey] = useState('');
-    function playing(audioClip) {
+     async function playing(audioClip) {
         const audio = document.getElementById(audioClip.keyTrigger);
         console.log(audio);
-        if (audio)
+        if (audio){
+            try{
             audio.currentTime = 0;
-            audio.play();
+            await audio.play();
             setActiveKey(audioClip.description);
-
+            } catch (error) {
+                console.error("オーディオ再生中にエラーが発生しました:", error);
+            }
+            
+        }
             // 非同期処理が必要？await/asyncを学ぶ
     
     
